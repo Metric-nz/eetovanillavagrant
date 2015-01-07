@@ -1,4 +1,4 @@
-eetovanillavagrant
+vanillaforum
 ==================
 
-Expression engine to Vanilla forum vagrant config
+Vanilla forum vagrant config
