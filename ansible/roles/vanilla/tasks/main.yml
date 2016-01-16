@@ -17,7 +17,7 @@
 - name: vanilla | Get vanilla source
   git: repo=https://github.com/vanilla/vanilla.git
        dest=/vagrant/files/www/html
-       version=2.1
+       version=2.2
        # accept_hostkey=yes
        
 - name: vanilla | Get addons | Create directory for downloaded add-on archive

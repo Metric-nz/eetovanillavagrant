@@ -21,18 +21,13 @@ def which(cmd)
     end
     return nil
 end
+
 Vagrant.configure("2") do |config|
 
-    config.vm.provider :virtualbox do |v|
-        v.name = "default"
-        v.customize [
-            "modifyvm", :id,
-            "--name", "default",
-            "--memory", 512,
-            "--natdnshostresolver1", "on",
-            "--cpus", 1,
-        ]
-    end
+	config.vm.provider "virtualbox" do |v|
+	  v.memory = 512
+	  v.cpus = 1
+	end
 
     config.vm.box = "ubuntu/trusty64"
     
