@@ -23,36 +23,39 @@ def which(cmd)
 end
 
 Vagrant.configure("2") do |config|
-
-	config.vm.provider "virtualbox" do |v|
-	  v.memory = 512
-	  v.cpus = 1
-	end
-
     config.vm.box = "ubuntu/trusty64"
-    
-    config.vm.network :private_network, ip: "192.168.33.99"
+	config.vm.provider "virtualbox" do |vb|
+		vb.memory = 512
+		vb.cpus = 1
+		vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+	end
+   
+#    config.vm.network :private_network, ip: "192.168.33.22"
     config.ssh.forward_agent = true
 
-    #############################################################
-    # Ansible provisioning (you need to have ansible installed)
-    #############################################################
+    # Shell provisioning
+#	config.vm.provision :shell, path: "ansible/windows.sh"
 
+	config.vm.synced_folder "./", "/vagrant"
+	
+    # Ansible provisioning
+	#keepig this for when ansible_local is reliable
+#	config.vm.provision :ansible_local do |ansible|
+#        ansible.playbook = "ansible/playbook.yml"
+#		ansible.inventory_path = "ansible/inventories/dev"
+#		ansible.verbose        = true
+#		ansible.install        = true
+#		ansible.limit          = "all"
+#    end
     
     if which('ansible-playbook')
         config.vm.provision "ansible" do |ansible|
-            ansible.playbook = "ansible/playbook.yml"
-            ansible.inventory_path = "ansible/inventories/dev"
+            ansible.playbook = "/vagrant/ansible/playbook.yml"
+            ansible.inventory_path = "/vagrant/ansible/inventories/dev"
             ansible.limit = 'all'
-            ansible.extra_vars = {
-                private_interface: "192.168.33.99",
-                hostname: "default"
-            }
         end
     else
-        config.vm.provision :shell, path: "ansible/windows.sh", args: ["default"]
+        config.vm.provision :shell, path: "ansible/windows.sh"
     end
-
     
-    config.vm.synced_folder "./", "/vagrant", type: "nfs"
 end
