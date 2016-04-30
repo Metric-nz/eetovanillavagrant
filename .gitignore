@@ -1,5 +1,6 @@
 # Vagrant Virtualbox files
 .vagrant/machines/default/virtualbox/*
+.vagrant/hostmanager/*
 
 # Windows image file caches
 Thumbs.db

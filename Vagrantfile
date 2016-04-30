@@ -16,6 +16,7 @@ end
 Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = "vanillaforum"
+    config.vm.network "forwarded_port", guest: 80, host: 8080
     config.vm.provider "virtualbox" do |vb|
         vb.name = config.vm.hostname
         vb.memory = 512
@@ -26,7 +27,14 @@ Vagrant.configure("2") do |config|
     config.ssh.forward_agent = true
 
     config.vm.synced_folder "./", "/vagrant"
-	
+	if Vagrant.has_plugin?("vagrant-exec")
+        config.exec.commands '*', prepend: 'sudo'
+    end
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+  
+    
+    
     # Ansible provisioning
     #keeping this for when ansible_local is reliable
     # Should be able to remove this when vagrant 1.8.2 is available
