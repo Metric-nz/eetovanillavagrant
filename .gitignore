@@ -2,6 +2,9 @@
 .vagrant/machines/default/virtualbox/*
 .vagrant/hostmanager/*
 
+# Ansible system files
+playbook.retry
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
