@@ -2,6 +2,9 @@
 .vagrant/machines/default/virtualbox/*
 .vagrant/hostmanager/*
 
+# Vanilla files
+files/www/source/
+
 # Ansible system files
 playbook.retry
 

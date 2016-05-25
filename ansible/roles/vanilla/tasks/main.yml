@@ -28,26 +28,26 @@
             working_dir=/vagrant/files/www/html
 
 - name: vanilla | Get addons | Create directory for downloaded archives
-  file: path=/vagrant/files/www/html/source/ state=directory owner=www-data group=www-data mode=0700
+  file: path=/vagrant/files/www/source/ state=directory owner=www-data group=www-data mode=0700
   
 - name: vanilla | Get addons | Download Yaga
-  get_url: url=http://vanillaforums.org/get/yaga-application-1.0.3.zip dest=/vagrant/files/www/html/source/
+  get_url: url=http://vanillaforums.org/get/yaga-application-1.0.3.zip dest=/vagrant/files/www/source/
 
 - name: vanilla | Get addons | Unzip Yaga
   become: yes
   become_user: www-data       
-  unarchive: src=/vagrant/files/www/html/source/yaga-application-1-0-3.zip dest=/vagrant/files/www/html/applications/ copy=no
+  unarchive: src=/vagrant/files/www/source/yaga-application-1-0-3.zip dest=/vagrant/files/www/html/applications/ copy=no
 
 # - name: vanilla | Get addons | Download Data Generator
-  # get_url: url=http://vanillaforums.org/get/datagenerator-plugin-0.2.zip dest=/vagrant/files/www/html/source/
+  # get_url: url=http://vanillaforums.org/get/datagenerator-plugin-0.2.zip dest=/vagrant/files/www/source/
 
 # - name: vanilla | Get addons | Unzip Data Generator
-  # unarchive: src=/vagrant/files/www/html/source/datagenerator-plugin-0-2.zip dest=/vagrant/files/www/html/plugins/ copy=no
+  # unarchive: src=/vagrant/files/www/source/datagenerator-plugin-0-2.zip dest=/vagrant/files/www/html/plugins/ copy=no
 
 - name: vanilla | Get theme | Download Bootstrap
-  get_url: url=http://vanillaforums.org/get/bootstrap-theme-2.5.0.zip dest=/vagrant/files/www/html/source/
+  get_url: url=http://vanillaforums.org/get/bootstrap-theme-2.5.0.zip dest=/vagrant/files/www/source/
 
 - name: vanilla | Get theme | Unzip Bootstrap
-  unarchive: src=/vagrant/files/www/html/source/bootstrap-theme-2-5-0.zip dest=/vagrant/files/www/html/themes/ copy=no
+  unarchive: src=/vagrant/files/www/source/bootstrap-theme-2-5-0.zip dest=/vagrant/files/www/html/themes/ copy=no
  
  
